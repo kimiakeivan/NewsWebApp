@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'news_api/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h4 class="logo"><a href="/home">JSONews</a></h4>
+        <nav>
+            <ul class="nav__links">
+              <li><a href="/home">Home</a></li>
+              <li><a href="/foryou">For you</a></li>
+              {% for country in countries %}
+                <li><a href="/{{ country }}">{{ country }}</a></li>
+              {% endfor %}
+              {% for category in categories %}
+                <li><a href="/category/{{ category }}">{{ category }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
