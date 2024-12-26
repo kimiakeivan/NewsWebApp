@@ -3,16 +3,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: rgb(224, 238, 253);
 }
 
-li, a {
-    color: black;
+ header li, a {
+    color: rgb(79, 79, 79);
     text-decoration: none;
-
 }
 
 header {
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +26,6 @@ header {
 .nav__links li{
     display: inline-block;
     padding: 0 20px;
-
 }
 
 .nav__links li a{
@@ -34,42 +33,111 @@ header {
 }
 
 .nav__links li a:hover{
-    color: #3463b9e4;
+    color: #000000e4;
 }
 
 
-
+main {
+    padding-top: 60px;
+}
 
 /* category stiles: */
+.hole {
+    width: 840px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;  /* فاصله بین کارت‌ها */
+}
 
+.articles {
+    display: flex;  /* برای کنار هم قرار دادن عناصر */
+    gap: 20px;  /* فاصله بین عکس و توضیحات */
+    justify-content: space-between;  /* فاصله مناسب بین عکس و توضیحات */
+}
 
+.article-card {
+    border-top: 1px solid rgb(101, 101, 101); 
+    display: flex;  /* برای کنار هم قرار دادن عکس و توضیحات */
+    /* align-items: center;   */
+    width: 100%;
+}
+
+.title-image {
+    flex: 1;  /* برای اینکه عکس و لینک در یک فضای مشخص قرار بگیرند */
+    max-width: 33%;  /* عرض ثابت برای عکس */
+    margin-right: 20px;  /* فاصله بین عکس و توضیحات */
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.title-image img {
+    width: 100%;
+    height: auto;  /* حفظ نسبت ابعاد عکس */
+    border-radius: 5%;
+}
+
+.desc {
+    flex: 2;  /* برای اینکه توضیحات فضای بیشتری بگیرد */
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.desc p {
+    margin: 0;  /* حذف فاصله پیش‌فرض پاراگراف‌ها */
+    font-size: 20px;
+}
+
+/* 
 .hole {
     grid-column: span 12;
     width: 840px;
     margin: 0 auto;
 }
 
-
 .articles {
-    /* display: flex;
+    display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center; */
+    justify-content: center;
     display: block;
     padding: 16px;
     border-radius: 16px;
     margin-top: 24px;
-    background-color: #fff;
-
+    background-color: #f8f8f8;
 }
 
 .article-card {
-    /* width: 800px;
+    width: 840px;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease; */
+    transition: transform 0.3s ease;
 
 }
+
+.title-image {
+    position: relative;
+    display: inline-block;
+    width: 33%;
+    height: 100%;
+}
+
+.title-image img{
+    width: 100%;
+}
+
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    display: block;
+    padding: 16px;
+    border-radius: 16px;
+    margin-top: 24px;
+    background-color: #f8f8f8;
+} */

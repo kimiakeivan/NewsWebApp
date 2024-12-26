@@ -17,4 +17,4 @@ class News(models.Model):
     country = models.CharField(null=True, max_length=100)
 
     def __str__(self):
-        return self.category
+        return self.title

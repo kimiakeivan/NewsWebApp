@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news_api.apps.NewsApiConfig',
+    'admin_mode.apps.AdminModeConfig',
 ]
 
 MIDDLEWARE = [
