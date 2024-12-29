@@ -6,15 +6,27 @@ from .models import News
 from admin_mode.views import COUNTRIES, CATEGORIES
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
 
 
 # Create your views here.
 
-
+    # news in homepage
 def home(request):
-    news = News.objects.all().order_by('published_at')
+    # news = News.objects.all().order_by('published_at')
+
+    category_news = {}  # a dict to store news of categories
+    for category in CATEGORIES: # we need first three news of each category
+        news = News.objects.filter(category=category).order_by('-published_at')[:3]  
+        category_news[category] = news
+        
+    # for i,j in category_news.items():
+    #     print(i)
+    #     print(j)
     context = {
-        'news': news,
+        'category_news': category_news,
         'categories': CATEGORIES,
         'countries': COUNTRIES
     }
@@ -23,10 +35,12 @@ def home(request):
 
 
 
-
+    # news in category
 def category_view(request, category):
-    news_in_category = News.objects.filter(category=category).order_by('view_count')
+    news_in_category = News.objects.filter(category=category).order_by('-view_count')
     
+
+
     context = {
         'news': news_in_category,
         'category': category, 
@@ -40,8 +54,9 @@ def category_view(request, category):
 
 
 
+    # iran or world news?
 def country_view(request, country):
-    news_in_category = News.objects.filter(country=country).order_by('view_count')
+    news_in_category = News.objects.filter(country=country).order_by('-view_count')
     
     context = {
         'news': news_in_category,
@@ -54,6 +69,7 @@ def country_view(request, country):
 
 
 
+    #login required! (only if you wish a foryou page)
 @login_required
 def foryou(request):
     context = {
@@ -65,13 +81,3 @@ def foryou(request):
 
 
 
-# def home(request):
-#     url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={API_KEY}"
-#     response = requests.get(url)
-#     data = response.json()
-
-#     articles = data['articles']
-
-#     context = {"articles": articles}
-
-#     return render(request, "news_api/home.html", context)
