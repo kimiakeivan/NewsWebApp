@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +31,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/home'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news_api.apps.NewsApiConfig',
     'admin_mode.apps.AdminModeConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +73,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'news_webapp.wsgi.application'
 

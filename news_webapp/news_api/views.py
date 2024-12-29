@@ -4,6 +4,8 @@ from datetime import datetime
 import pytz
 from .models import News
 from admin_mode.views import COUNTRIES, CATEGORIES
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 
 # Create your views here.
@@ -51,8 +53,15 @@ def country_view(request, country):
 
 
 
-def foryou_category(request):
-    pass
+
+@login_required
+def foryou(request):
+    context = {
+    'countries': COUNTRIES,
+    'categories': CATEGORIES,
+    }
+    return render(request, 'news_api/foryou.html', context)
+
 
 
 

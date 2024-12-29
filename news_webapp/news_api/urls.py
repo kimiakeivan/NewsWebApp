@@ -8,5 +8,5 @@ urlpatterns = [
     # path('', views.home, name='home'),
     path('category/<str:category>/',  views.category_view, name='category_view'),
     path('region/<str:country>/', views.country_view, name='country_view'),
-    path('foryou/', views.foryou_category, name='foryou_category')
+    path('foryou/', views.foryou, name='foryou')
 ]
