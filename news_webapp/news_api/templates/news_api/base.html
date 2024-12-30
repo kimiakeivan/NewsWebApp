@@ -22,6 +22,12 @@
               {% for category in categories %}
                 <li><a href="/category/{{ category }}">{{ category }}</a></li>
               {% endfor %}
+              <li class="nav__links">
+                <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
+              </li>
+              <li class="nav__links">
+                <a class="btn btn-primary" href="{% url 'signup' %}?next={{ request.path }}">Sign Up</a>
+              </li>
             </ul>
           </nav>
     </header>

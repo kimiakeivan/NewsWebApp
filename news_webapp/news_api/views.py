@@ -7,8 +7,9 @@ from admin_mode.views import COUNTRIES, CATEGORIES
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.shortcuts import render
-
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
@@ -81,3 +82,27 @@ def foryou(request):
 
 
 
+
+
+
+
+class CustomLoginView(LoginView):
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return super().get_success_url()
+
+
+
+
+def signup(request):
+    next_url = request.GET.get('next', '/')  # آدرس پیش‌فرض '/'
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(next_url)  # هدایت به مسیر `next`
+    else:
+        form = UserCreationForm()
+    return render(request, 'news_api/signup.html', {'form': form, 'next': next_url})

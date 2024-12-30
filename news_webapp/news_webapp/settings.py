@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login/'  # مسیر لاگین
+LOGIN_REDIRECT_URL = '/'  # مسیر پیش‌فرض بعد از لاگین
+
 LOGOUT_REDIRECT_URL = '/home'
 
 INSTALLED_APPS = [
