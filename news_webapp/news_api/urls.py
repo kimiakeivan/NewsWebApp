@@ -8,5 +8,6 @@ urlpatterns = [
     path('category/<str:category>/',  views.category_view, name='category_view'),
     path('region/<str:country>/', views.country_view, name='country_view'),
     path('foryou/', views.foryou, name='foryou'),
+    path('save_preferences/', views.save_preferences, name='save_preferences'),
     path('signup/', views.signup, name='signup'),
 ]

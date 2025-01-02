@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -18,3 +20,15 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+
+
+class UserPreferences(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    categories = models.JSONField(blank=True, null=True)  # ذخیره لیست دسته‌بندی‌ها به صورت JSON
+    countries = models.JSONField(blank=True, null=True)  # ذخیره کشورهای انتخابی به صورت JSON
+
+    def __str__(self):
+        return f"Preferences for {self.user.username}"
