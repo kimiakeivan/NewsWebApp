@@ -7,29 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
-    <link rel="stylesheet" href="{% static 'news_api/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'news_api/css/stylee.css' %}">
 </head>
 <body>
     <header>
+      <div class="title__links">
         <h4 class="logo"><a href="/home">JSONews</a></h4>
-        <nav>
-            <ul class="nav__links">
-              <li><a href="/home">Home</a></li>
-              <li><a href="/foryou">For you</a></li>
-              {% for country in countries %}
-                <li><a href="/region/{{ country }}">{{ country }}</a></li>
-              {% endfor %}
-              {% for category in categories %}
-                <li><a href="/category/{{ category }}">{{ category }}</a></li>
-              {% endfor %}
-              <li class="nav__links">
-                <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
-              </li>
-              <li class="nav__links">
-                <a class="btn btn-primary" href="{% url 'signup' %}?next={{ request.path }}">Sign Up</a>
-              </li>
-            </ul>
-          </nav>
+        <input class="search" type="text" placeholder="Search for tipics ...">
+        <ul class="nav__links">
+          <li><a class="login" href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+          <li><a class="signup" href="{% url 'signup' %}?next={{ request.path }}">Sign Up</a></li>
+        </ul>
+      </div>
+      <nav>
+          <ul class="nav__links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/foryou">For you</a></li>
+            {% for country in countries %}
+              <li><a href="/region/{{ country }}">{{ country }}</a></li>
+            {% endfor %}
+            {% for category in categories %}
+              <li><a href="/category/{{ category }}">{{ category }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
     </header>
     <main>
         {% block content %}
@@ -41,7 +42,6 @@
             <button type="submit">Log out</button>
         </form>        
     </footer>
-
 
     <script src="{% static 'news_api/js/customize.js' %}"></script>
 </body>

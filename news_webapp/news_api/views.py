@@ -139,11 +139,6 @@ def save_preferences(request):
 
 
 
-
-
-
-
-
 class CustomLoginView(LoginView):
     def get_success_url(self):
         next_url = self.request.GET.get('next')
@@ -163,4 +158,7 @@ def signup(request):
             return redirect(next_url)  # هدایت به مسیر `next`
     else:
         form = UserCreationForm()
+
     return render(request, 'news_api/signup.html', {'form': form, 'next': next_url})
+
+

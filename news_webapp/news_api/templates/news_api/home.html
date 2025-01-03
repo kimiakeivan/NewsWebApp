@@ -20,31 +20,26 @@
   </div>
   {% endfor %} -->
 
-
+<div class="category-bound">
   {% for category,articles in category_news.items %}
   <div class="hole">
-    <h1></h1>
-    <h1></h1>
-    <h2>{{ category }}</h2>
-    
-    <!-- استفاده از category_news[category] برای دسترسی به اخبار این دسته -->
+    <h2>{{ category }} ></h2>
     {% for article in articles %}
-      <div class="articles">
         <div class="article-card">
           <div class="title-image">
             <img src="{{ article.image_url }}" alt="{{ article.title }}" />
             <a href="{{ article.news_url }}">{{ article.title }}</a>
           </div>
           <div class="desc">
-            <p>{{ article.name }}</p>
-            <p>{{ article.description }}</p>
+            <!-- <p>{{ article.name }}</p> -->
+            <!-- <p>{{ article.description }}</p> -->
             <p>Published at: {{ article.published_at }}</p>
           </div>
         </div>
-      </div>
     {% endfor %}
   </div>
-{% endfor %}
+  {% endfor %}
+</div>
 
 
 {% endblock %}

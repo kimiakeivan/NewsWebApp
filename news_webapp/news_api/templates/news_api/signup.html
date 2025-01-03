@@ -1,14 +1,22 @@
-{% extends 'news_api/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Sign Up</h1>
+        <form method="post" action="{% url 'signup' %}?next={{ next }}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit">Sign Up</button>
+        </form>
+        <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+    </div>
+</body>
+</html>
 
-{% block content %}
-<form method="post" action="{% url 'signup' %}?next={{ next }}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit">Sign Up</button>
-</form>
-<a href="{% url 'login' %}?next={{ request.path }}">Login</a>
-
-
-{% endblock %}
 

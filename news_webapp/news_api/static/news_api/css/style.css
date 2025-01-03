@@ -6,7 +6,7 @@
     background-color: rgb(224, 238, 253);
 }
 
- header li, a {
+header li, a {
     color: rgb(79, 79, 79);
     text-decoration: none;
 }
@@ -37,57 +37,83 @@ header {
 }
 
 
+
+
+
 main {
-    padding-top: 60px;
-}
-
-/* category stiles: */
-.hole {
-    width: 840px;
+    padding-top: 80px;
+    width: 900px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;  /* فاصله بین کارت‌ها */
 }
 
-.articles {
-    display: flex;  /* برای کنار هم قرار دادن عناصر */
-    gap: 20px;  /* فاصله بین عکس و توضیحات */
-    justify-content: space-between;  /* فاصله مناسب بین عکس و توضیحات */
+
+.hole {
+    max-width: 33%;
+    display: inline-block;
 }
 
-.article-card {
-    border-top: 1px solid rgb(101, 101, 101); 
-    display: flex;  /* برای کنار هم قرار دادن عکس و توضیحات */
-    /* align-items: center;   */
-    width: 100%;
-}
+
+
+
+
+
+
+
+
+
 
 .title-image {
-    flex: 1;  /* برای اینکه عکس و لینک در یک فضای مشخص قرار بگیرند */
-    max-width: 33%;  /* عرض ثابت برای عکس */
-    margin-right: 20px;  /* فاصله بین عکس و توضیحات */
+    flex: 1;  
+    max-width: 100%; 
+    margin-right: 20px;  
     font-size: 20px;
     padding-top: 10px;
 }
 
 .title-image img {
-    width: 100%;
-    height: auto;  /* حفظ نسبت ابعاد عکس */
+    max-width: 100%;
+    height: auto;
     border-radius: 5%;
 }
-
+/* 
 .desc {
-    flex: 2;  /* برای اینکه توضیحات فضای بیشتری بگیرد */
+    flex: 2;  
     display: flex;
     flex-direction: column;
     padding-top: 10px;
 }
 
 .desc p {
-    margin: 0;  /* حذف فاصله پیش‌فرض پاراگراف‌ها */
+    margin: 0;  
     font-size: 20px;
-}
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 
 .hole {
