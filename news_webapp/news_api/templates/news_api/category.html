@@ -3,13 +3,13 @@
 
 
 {% block content %}
-<h1>{% if country %} {{ country|title }}{% endif %} {% if category %} {{ category|title }}{% endif %}</h1>
+<h1 class="category-name">{% if country %} {{ country|title }}{% endif %} {% if category %} {{ category|title }}{% endif %}</h1>
 
 <div class="hole-category">
     <!-- <h1>{% if country %} {{ country|title }}{% endif %} {% if category %} {{ category|title }}{% endif %}</h1> -->
     {% for article in news %}
         <div class="articles">
-            <div class="article-card">
+            <div class="article-card-category">
                 <!-- <h2>{{ article.title }}</h2> -->
                 <div class="title-image">
                     <img src="{{ article.image_url }}" alt="{{ article.title }}">
@@ -17,8 +17,8 @@
                 </div>
                 <div class="desc">
                     <p>{{ article.name }}</p>
-                    <p>{{ article.description }}</p>
-                    <p>Published at: {{ article.published_at }}</p>
+                    <p class="description">{{ article.description }}</p>
+                    <p class="publish">Published at: {{ article.published_at }}</p>
                 </div>
             </div>
         </div>
