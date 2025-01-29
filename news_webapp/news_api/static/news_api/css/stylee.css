@@ -1,5 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://cdn.fontcdn.ir/font/Shabnam/Shabnam.css');
 
+
+html.dark-mode {
+    /* background:rgb(255, 247, 237); */
+    background:rgb(247,246,242);
+}
+
+body.dark-mode {
+    /* background:rgb(255, 247, 237); */
+    background:rgb(247,246,242);
+}
+  
+
+.hidden {
+    display: none;
+  }
+
+
+.theme-toggle {
+    font-size: 27px;
+    background: none;
+    color: wheat;
+    border: none;
+}
+.theme-toggle:hover {
+    color: rgba(232, 212, 176, 0.915);
+}
+
+body.dark-mode .theme-toggle {
+    color:rgb(61, 57, 49);   
+}
+
+body.dark-mode .theme-toggle:hover {
+    color:rgba(61, 57, 49, 0.785);   
+}
 
 body {
     margin: 0;
@@ -10,22 +45,65 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+
+
 /* -----------------------header------------------------- */
 header {
     display: block;
     position: fixed;
     width: 100%;
-    height: 140px;
+    height: 116px;
     margin: auto;
     /* border-bottom: 1px solid wheat; */
     /* background: rgb(43, 43, 84); */
     background: rgb(48, 48, 88);
+    padding-bottom: 7px;
 
+}
+
+body.dark-mode header {
+    background:rgb(239, 233, 220);
+    
 }
 
 header li, a {
     color: rgb(248, 240, 195);
     text-decoration: none;
+}
+
+/* header li, a::after {
+    color: rgb(248, 240, 195);
+    background: rgb(26, 115, 232);
+} */
+body.dark-mode header a.active::after {
+    position: relative;
+    content: "";
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: rgb(61, 57, 49);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: black;
+
+}
+
+
+header a.active::after {
+    position: relative;
+    content: "";
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: wheat;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: white !important
+
+}
+
+body.dark-mode header li, body.dark-mode header a {
+    color:rgb(61, 57, 49);   
 }
 
 .title__links {
@@ -35,7 +113,7 @@ header li, a {
     padding: 5px;
 }
 .logo {
-    width: 20%;
+    width: 22%;
     padding-left: 10px;
     margin-bottom: 15px;
     margin-top: 20px;
@@ -49,13 +127,33 @@ header li, a {
     width: 20%;
 }
 
-.search {
-    height: 48px;
-    vertical-align: middle;
+
+form.search-bar{
     width: 50%;
+    height: 48px;
+}
+
+form input.search {
+    height: 100%;
+    vertical-align: middle;
+    width: 100%;
     background: rgb(33, 33, 65);
     border-radius: 8px;
     border: 1px solid transparent;
+    padding-left: 10px;
+    letter-spacing: 1px;
+    color: beige;
+    font-size: 16px;
+}
+
+body.dark-mode .search {
+    background:rgb(247,246,242);
+    color: black;
+
+}
+
+button {
+    border: none;
 }
 
 .login {
@@ -65,9 +163,19 @@ header li, a {
     border-radius: 25px;
 }
 
+body.dark-mode .login {
+    background: rgba(94, 94, 114, 0.351);
+    color:rgb(61, 57, 49);   
+
+    color: black;
+}
+
 .title__links .login:hover {
     font-weight: 500;
     color: black;
+    background-color: rgba(232, 212, 176, 0.915);
+ 
+
 }
 
 .signup {
@@ -77,11 +185,21 @@ header li, a {
     border-radius: 25px;
 }
 
+body.dark-mode .signup {
+    background-color: rgb(247,246,242);
+    background-color: whitesmoke;
+}
+
+body.dark-mode .signup:hover {
+    background-color: rgba(232, 212, 176, 0.915);
+
+}
+
 .title__links .signup:hover {
+    /* background-color: rgba(232, 212, 176, 0.915); */
     background: wheat;
     color: black;
     font-weight: 500;
-
 }
 
 .nav__links {
@@ -94,12 +212,14 @@ header li, a {
 
 .title__links .nav__links li{
     display: inline-block;
-    padding: 10px;
+    padding: 0 10px;
 }
+
 
 .nav__links li{
     display: inline-block;
     padding: 0 20px;
+
 }
 
 .nav__links li a{
@@ -114,20 +234,21 @@ header li, a {
 
 
 
+
 /* -----------------------main------------------------- */
 
 main {
     /* height: 100%; */
     width: 80%;
     margin: auto;
-    color: wheat;
-    padding-top: 180px;
+    color: rgba(245, 222, 179, 0.844);
+    padding-top: 160px;
     
 }
 
 
 .hole {
-    height: 500px;
+    height: 540px;
     max-width: 30%;
     display: inline-block;
     background: rgb(48, 48, 88);
@@ -137,6 +258,11 @@ main {
     border-radius: 15px;
 }
 
+body.dark-mode .hole {
+    background:rgb(238, 235, 228);
+    /* background:rgba(235, 231, 221, 0.667); */  
+}
+
 .hole a .category {
     /* height: 5%; */
     color: wheat;
@@ -144,10 +270,21 @@ main {
     margin-bottom: 10px;
 }
 
+
+
+body.dark-mode .hole a .category {
+    color:rgb(61, 57, 49);   
+}
+
+body.dark-mode .article-card {
+    border-top: 1px solid rgb(120, 111, 96);
+}
+
+
 .article-card {
     border-top: 1px solid rgb(244, 228, 198);
-    height: 30%; /* تنظیم ارتفاع برای پر کردن کارت */
-    overflow: hidden; /* جلوگیری از بیرون زدن محتوا */
+    height: 30%;
+    overflow: hidden;
     /* height: 220px; */
     display: flex;
     padding-top: 10px;
@@ -155,7 +292,7 @@ main {
 
 .image {
     /* max-width: 100%;  */
-    max-width: 30%;
+    max-width: 33%;
     padding-top: 10px;
     display: inline-block;
 }
@@ -165,6 +302,7 @@ main {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+    /* max-height: 72px; */
 }
 
 .title a {
@@ -177,6 +315,11 @@ main {
     text-decoration: underline;
     text-decoration-color: beige;
 }
+body.dark-mode .title a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(120, 111, 96);
+
+}
 
 
 .title {
@@ -186,6 +329,11 @@ main {
     padding: 5px 0;
     margin-right: 10px;
 }
+
+body.dark-mode .title,body.dark-mode  .title a,body.dark-mode  .title a:hover{
+    color: black;
+}
+
 
 
 
@@ -200,8 +348,19 @@ main {
     padding: 10px;
 }
 
+body.dark-mode .hole-category {
+    background:rgb(238, 235, 228);
+    color:rgb(61, 57, 49);   
+
+    /* background:rgba(235, 231, 221, 0.667); */ 
+}
+
 .category-name {   
-    margin: 40px 110px;
+    margin: 30px 110px;
+}
+
+body.dark-mode .category-name {
+    color: #000;
 }
 
 .article-card-category {
@@ -211,6 +370,13 @@ main {
     display: flex;
     padding-top: 10px;
 }
+
+body.dark-mode .article-card-category {
+    /* border-bottom: 3px solid rgb(247,246,242); */
+    border-bottom: 1px solid rgb(120, 111, 96);
+
+}
+
 
 .title-image {
     max-width: 33%;
@@ -223,10 +389,11 @@ main {
 
 
 .title-image img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
+    max-height: 170px;
 }
 
 .title-image a {
@@ -235,22 +402,59 @@ main {
     font-size: 19px;
 }
 
+body.dark-mode .title-image a{
+    color: #000;
+}
+
 .title-image a:hover {
     text-decoration: underline;
     text-decoration-color: beige;
 }
 
-
-.desc .description{
-    font-size: 17px;
-    letter-spacing: 0.5px;
+body.dark-mode .title-image a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(120, 111, 96);
 }
 
-.desc .publish {
-font-size: 13px;
+
+.desc {
+    margin-right: 10px;
+    max-width: 66%;
+}
+
+body.dark-mode .desc {
+    margin-right: 10px;
+    color: rgb(66, 41, 23);
+}
+
+.desc .description{
+    font-size: 17.5px;
+    letter-spacing: 0.5px;
     
 }
 
+.desc .publish {
+    font-size: 13px;
+    padding-top: 10px;
+    
+        
+}
+
+.content {
+    color: #737373;
+    font-size: 15px;
+}
+
+p.content a.news-link{
+    color: #94a8b9;
+    text-decoration:underline rgba(245, 245, 220, 0.426);
+}
+
+body.dark-mode p.content a.news-link {
+    color: #b09e82;
+    text-decoration:underline #b09e82c3;
+
+}
 
 /* ------------------------for you-------------------------- */
 
@@ -260,6 +464,10 @@ font-size: 13px;
     align-items: center;
 }
 
+body.dark-mode .customize {
+    color: rgb(50, 19, 3);
+}
+
 #customizeButton {
     background: wheat;
     border-radius: 25px;
@@ -267,7 +475,130 @@ font-size: 13px;
     width: 120px;
 }
 
+.modal {
 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.468);
+    padding-top: 60px;
+
+}
+
+
+
+div .modal-content {
+    /* padding: 20px; */
+    /* background: rgb(48, 48, 88);
+    margin: auto; */
+    background-color: rgb(48, 48, 88);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
+    
+}
+
+body.dark-mode div .modal-content {
+    background-color: #decdc3;
+    background-color: #edddd4f4;
+
+    color: rgb(68, 19, 5);
+
+}
+
+.modal-content h2 {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin: 0;
+    border-bottom: 1px solid rgb(244, 230, 205);
+}
+
+body.dark-mode .modal-content h2 {
+    border-bottom: 1px solid rgb(41, 33, 27);
+
+}
+
+#customize-form {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 80vh;
+
+}
+
+#closeModal {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Modal container */
+.category-btn {
+    background-color: rgba(148, 147, 145, 0.656);
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+body.dark-mode  .category-btn {
+    background-color:  (154, 151, 146, 0.927);
+    color: black;
+}
+
+
+.category-btn.selected {
+    background-color:  #e0e0e0;
+    color: black;
+}
+
+body.dark-mode  .category-btn.selected {
+    background-color:  #976a59ec;
+    background-color:  #c48169ec;
+    /* background-color:  #e0e0e0; */
+    color: #e0e0e0;
+}
+
+.category-btn:hover {
+    background-color: #e0e0e0;
+}
+
+body.dark-mode .category-btn:hover {
+    background-color:  #c48169ec;
+    color: #e0e0e0;
+
+}
+
+.submit-btn {
+    padding: 12px 20px;
+    border-radius: 25px;
+    margin: 30px 30px 10px 30px;
+    background: #e0e0e0;
+    cursor: pointer;
+}
+
+body.dark-mode .submit-btn:hover {
+    background: #9e5b49b0;
+}
+
+body.dark-mode .submit-btn {
+    background: #9e5c49;
+    color: white;
+
+}
+
+/* .submit-btn:hover {
+
+} */
 
 /* ------------------------login-------------------------- */
 
@@ -277,15 +608,126 @@ font-size: 13px;
     margin:150px auto;
     padding: 2rem 1rem;
     background-color: antiquewhite;
+    /* background: rgb(136, 136, 200); */
     text-align: center;
     /* background-color: rgb(48, 48, 88); */
     border-radius: 15px;
 }
 
-/* .form {
+body.dark-mode .wrapper {
+    background:rgb(238, 235, 228);
+    /* background:rgba(235, 231, 221, 0.667); */  
+}
 
+.form {
+    padding: 12px 0;
+}
+
+
+.formlink {
+    color:rgb(151, 97, 30);   
+    text-decoration: underline;
+}
+
+
+
+input button.login  {
+    margin: 15px 5px  ;
+}
+
+.signup-design button.login:hover {
+    background-color: black;
+}
+
+/* ------------------------sign up-------------------------- */
+
+.form-control {
+    background-color: black;
+}
+.signup-design label {
+    display: block;
+    padding: 5px 25px;
+    color: #333333f8;
+}
+
+.signup-design input {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 0 10px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(251, 247, 241, 0.731);
+    border: 1px solid rgba(220, 220, 220, 0.882); 
+}
+
+p .redirect {
+    display: flex;
+    justify-content: center;
+
+}
+
+ul .errorlist{
+    color: red;
+}
+
+/* ------------------------language-------------------------- */
+.rtl {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Shabnam', sans-serif;
+}
+
+.ltr {
+    direction: ltr;
+    text-align: left;
+}
+
+/* body:lang(fa) {
+    font-family: 'Vazir', sans-serif;
+} */
+/* 
+h1.news-title:lang(fa), h1:lang(fa), h2:lang(fa), h3:lang(fa), span:lang(fa), div:lang(fa) {
+    font-family: 'Vazir', sans-serif;
 } */
 
 
+/* ------------------------custom article-------------------------- */
 
-/* ------------------------sign up-------------------------- */
+.custom-article {
+    width: 80%;
+    margin: auto;
+    background: rgb(48, 48, 88);
+    border-radius: 25px;
+    padding: 20px;
+}
+
+body.dark-mode .custom-article {
+    background:rgb(238, 235, 228);
+    color:rgb(61, 57, 49);   
+
+}
+
+.custom-title-image {
+    max-width: 80%;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.news-title {
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+h1.news-title {
+    font-size: 28px;
+}
+
+.custom-title-image img{
+    max-width: 80%;
+    display: inline-block;
+    border-radius: 20px;
+    
+}

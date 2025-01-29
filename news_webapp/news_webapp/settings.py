@@ -31,12 +31,13 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-LOGIN_URL = '/login/'  # مسیر لاگین
-LOGIN_REDIRECT_URL = '/'  # مسیر پیش‌فرض بعد از لاگین
+LOGIN_URL = '/login/' 
+LOGIN_REDIRECT_URL = '/'  
 
 LOGOUT_REDIRECT_URL = '/home'
 
 INSTALLED_APPS = [
+    'django_elasticsearch_dsl',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news_api.apps.NewsApiConfig',
-    'admin_mode.apps.AdminModeConfig',
     'django_extensions',
 ]
 
@@ -91,6 +91,12 @@ DATABASES = {
     }
 }
 
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://localhost:9200'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
