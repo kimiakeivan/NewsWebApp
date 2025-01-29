@@ -1,0 +1,47 @@
+{% extends 'news_api/base.html' %}
+{% block content %}
+
+
+
+
+{% if match_articles %}
+<div class="hole-category">
+    {% for article in match_articles %}
+    <div class="article-card-category">
+        <!-- <h2>{{ article.title }}</h2> -->
+        <div class="title-image">
+            <img src="{{ article.image_url }}" alt="">
+            <!-- <a href="{{article.news_url}}">{{article.title}}</a> -->
+            <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">{{ article.title }}</a>
+
+        </div>
+        <div class="desc">
+            <p>{{ article.name }}</p>
+            <p class="description">{% if article.description %}  {{ article.description }} {% endif %}</p>
+            <p class="content">
+                {% if article.content %}
+                    {{ article.content|slice:":100" }}{% if article.content|length > 100 %}...{% endif %}
+                {% endif %}
+                <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">
+                    {% if "آ" in article.content or "ا" in article.content or "ب" in article.content %}
+                        بیشتر بخوانید
+                    {% else %}
+                        read more
+                    {% endif %}
+                </a>
+            </p>            
+            <p class="publish">{{ article.published_at }}</p>
+            <p class="views"> Views {{article.view_count}}</p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+{% endif %}
+
+
+
+
+
+{% endblock %}
