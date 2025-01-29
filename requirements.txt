@@ -1,0 +1,10 @@
+asgiref==3.8.1
+Django==5.1.4
+requests==2.31.0
+pytz==2024.1
+elasticsearch==8.10.0
+elasticsearch-dsl==8.9.0
+python-dotenv==1.0.0
+sqlparse==0.5.3
+newsapi-python==0.2.7
+django-allauth==0.58.2
