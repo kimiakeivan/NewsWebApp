@@ -3,21 +3,24 @@ import requests
 from datetime import datetime
 import pytz
 from .models import News, UserPreferences
-from admin_mode.views import COUNTRIES, CATEGORIES
+from .tasks import COUNTRIES, CATEGORIES
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from .forms import SignupForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 import json
 from django.http import JsonResponse
-
+from django.shortcuts import get_object_or_404
+from .documents import NewsDocument 
+from elasticsearch_dsl.query import MultiMatch 
 
 
 # Create your views here.
 
-    # news in homepage
 def home(request):
     # news = News.objects.all().order_by('published_at')
 
@@ -40,12 +43,8 @@ def home(request):
 
 
 
-    # news in category
 def category_view(request, category):
     news_in_category = News.objects.filter(category=category).order_by('-view_count')
-    
-
-
     context = {
         'news': news_in_category,
         'category': category, 
@@ -58,13 +57,10 @@ def category_view(request, category):
 
 
 
-
     # iran or world news?
 def country_view(request, country):
     news_in_category = News.objects.filter(country=country).order_by('-view_count')
     
-
-
     context = {
         'news': news_in_category,
         'country': country, 
@@ -76,23 +72,48 @@ def country_view(request, country):
 
 
 
-    #login required! (only if you wish a foryou page)
+def article_with_no_url(request, news_id):
+    article = get_object_or_404(News, id=news_id)
+    context = {
+        'article': article,  # استفاده از 'article' به جای 'news'
+        'countries': COUNTRIES,
+        'categories': CATEGORIES,
+    }
+    return render(request, 'news_api/article_detail.html', context)  # context به درستی ارسال شود
+
+
+
+
+def increment_view_count(request, article_id):
+    article = get_object_or_404(News, id=article_id)
+
+    print(article.id)
+    print(article.view_count)
+    article.view_count += 1
+    print(article.view_count)
+
+
+    article.save()
+
+    return JsonResponse({'view_count': article.view_count})
+
+
+
+
 @login_required
 def foryou(request):
 
-    # دریافت ترجیحات کاربر
     preferences = UserPreferences.objects.get(user=request.user)
     print(preferences)
-    # دسته‌بندی‌های منتخب کاربر
+
     selected_categories = preferences.categories
     selected_countries = preferences.countries
     print(selected_categories)
-    # یک دیکشنری برای ذخیره اخبار هر دسته‌بندی
+
     category_news = {}
     
-    # دریافت اخبار مربوط به دسته‌بندی‌های منتخب
     for category in selected_categories:
-        news = News.objects.filter(category=category).order_by('-published_at')[:3]  # سه خبر اول هر دسته‌بندی
+        news = News.objects.filter(category=category).order_by('-published_at')[:3]
         category_news[category] = news
   
     print(category_news)
@@ -112,29 +133,34 @@ def foryou(request):
 def save_preferences(request):
     if request.method == 'POST':
         try:
-            # دریافت داده‌ها از درخواست
-            data = json.loads(request.body)  # تبدیل داده‌های JSON به دیکشنری پایتون
+            data = json.loads(request.body)
 
             categories = data.get('categories', [])
-            countries = data.get('countries', [])
-
-            # ذخیره یا به‌روز‌رسانی ترجیحات کاربر در دیتابیس
             preferences, created = UserPreferences.objects.update_or_create(
                 user=request.user,
-                defaults={'categories': categories, 'countries': countries}
+                defaults={'categories': categories}
             )
 
-            # پاسخ موفقیت‌آمیز به کاربر
-            return JsonResponse({'success': True})
+            category_news = {}
+            for category in categories:
+                news = News.objects.filter(category=category).order_by('-published_at')[:3]
+                category_news[category] = [
+                    {
+                        'title': article.title,
+                        'image_url': article.image_url,
+                        'news_url': article.news_url,
+                        'published_at': article.published_at,
+                        'view_count': article.view_count,
+                    }
+                    for article in news
+                ]
+
+            return JsonResponse({'success': True, 'category_news': category_news})
 
         except Exception as e:
-            # در صورت بروز خطا
             return JsonResponse({'success': False, 'error': str(e)}, status=400)
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
-
-
-
 
 
 
@@ -152,13 +178,77 @@ class CustomLoginView(LoginView):
 def signup(request):
     next_url = request.GET.get('next', '/')  # آدرس پیش‌فرض '/'
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect(next_url)  # هدایت به مسیر `next`
     else:
-        form = UserCreationForm()
+        form = SignupForm()
 
     return render(request, 'news_api/signup.html', {'form': form, 'next': next_url})
+
+
+
+
+def search(request):
+
+    q = request.GET.get("q")
+    if q:
+        query = MultiMatch(query=q, fields=["title", "description"], fuzziness="AUTO")
+        s = NewsDocument.search().query(query)
+        # context['match_articles'] = s
+
+    context = {
+        'countries': COUNTRIES,
+        'categories': CATEGORIES,
+        'match_articles': s,
+        'q': q
+        }
+    return render(request, 'news_api/search.html', context)
+
+
+
+def update_news_api(request):
+    category_news = {}
+    for category in CATEGORIES:
+        news = News.objects.filter(category=category).order_by('-published_at')[:3]
+        category_news[category] = [
+            {
+                'id': n.id,
+                'title': n.title,
+                'news_url': n.news_url,
+                'image_url': n.image_url,
+                'published_at': n.published_at,
+                'view_count': n.view_count
+            }
+            for n in news
+        ]
+    
+    return JsonResponse({'category_news': category_news})
+
+
+
+def update_category_api(request, category):
+    news_in_category = News.objects.filter(category=category).order_by('-view_count')
+    print(n.published_at)
+    news_list = [
+        {  
+            'title': n.title,
+            'name': n.name,
+            'id': n.id,
+            'description': n.description,
+            'content': n.content,
+            'news_url': n.news_url,
+            'image_url': n.image_url,
+            'published_at': n.published_at,
+            'view_count': n.view_count,
+        }
+
+        for n in news_in_category
+
+
+    ]
+    return JsonResponse({'category': category, 'news': news_list})
 
 

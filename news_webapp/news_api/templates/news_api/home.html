@@ -6,17 +6,21 @@
 <div class="category-bound">
   {% for category,articles in category_news.items %}
   <div class="hole">
-    <a href="/category/{{ category }}"><h2 class="category" >{{ category }} ></h2></a>
+    <a href="/category/{{ category }}"><h2 class="category" >{{ category }} <i class='bx bx-chevron-right' ></i> </h2></a>
     {% for article in articles %}
         <div class="article-card">
           <div class="title">
             <!-- <p>{{ article.name }}</p> -->
             <!-- <p>{{ article.description }}</p> -->
-            <a target="_blank" href="{{ article.news_url }}">{{ article.title }}</a>
-            <p>Published at: {{ article.published_at }}</p>
+            <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">
+              {{ article.title }}
+            </a>
+            <p  >{{ article.published_at }}</p>
+            <p class="views"> Views {{article.view_count}}</p>
+
           </div>
           <div class="image">
-            <img src="{{ article.image_url }}" alt="{{ article.title }}" />
+            <img src="{{ article.image_url }}" alt="" />
             <!-- <a href="{{ article.news_url }}">{{ article.title }}</a> -->
           </div>
         </div>

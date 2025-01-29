@@ -1,68 +1,73 @@
-{% extends 'news_api/base.html' %}
-
-{% block content %}
-
+{% extends 'news_api/base.html' %} {% block content %}
 <div class="customize">
-    <h1>Your Topics</h1>
-    <button id="customizeButton">Customize</button>
+  <h1>Your Topics</h1>
+  <button id="customizeButton">Customize</button>
+</div>
+
+<div id="customizeModal" class="modal" style="display: none">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+
+    <h2>Select Your Preferences</h2>
+
+    <form id="customize-form">
+      <div class="categories">
+        <button type="button" class="category-btn" data-value="technology">
+          Technology
+        </button>
+        <button type="button" class="category-btn" data-value="entertainment">
+          Entertainment
+        </button>
+        <button type="button" class="category-btn" data-value="health">
+          Health
+        </button>
+        <button type="button" class="category-btn" data-value="science">
+          Science
+        </button>
+        <button type="button" class="category-btn" data-value="sports">
+          Sports
+        </button>
+        <button type="button" class="category-btn" data-value="business">
+          Business
+        </button>
+        <button type="button" class="category-btn" data-value="general">
+          General
+        </button>
+      </div>
+      <button type="submit" class="submit-btn">Save Preferences</button>
+    </form>
+  </div>
 </div>
 
 
-<!-- مودال -->
-<div id="customizeModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        
-        <h2>Select Your Preferences</h2>
-        
-        <form id="customize-form">
-            <label for="categories">Categories:</label>
-            <select id="categories" name="categories" multiple>
-                <option value="technology">Technology</option>
-                <option value="health">Health</option>
-                <option value="Science">Science</option>
-                <option value="sports">Sports</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="business">Business</option>
-                <option value="general">Politics</option>
-            </select>
+<div class="category-bound">
+  {% for category, news_list in category_news.items %}
+  <div class="hole">
+    <a href="/category/{{ category }}">
+      <h2 id="category-{{category}}" class="category">
+        {{ category }} <i class="bx bx-chevron-right"></i>
+      </h2>
+    </a>
+    {% for article in news_list %}
+    <div class="article-card">
+      <div class="title">
+        <!-- <p>{{ article.name }}</p> -->
+        <!-- <p>{{ article.description }}</p> -->
+        <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">
+          {{ article.title }}
+        </a>
+        <p  >{{ article.published_at }}</p>
+        <p class="views"> Views {{article.view_count}}</p>
 
-            <label for="countries">Countries:</label>
-            <select id="countries" name="countries" multiple>
-                <option value="iran">Iran</option>
-                <option value="world">World</option>
-
-            </select>
-
-            <button type="submit">Save Preferences</button>
-        </form>
+      </div>
+      <div class="image">
+        <img src="{{ article.image_url }}" alt="" />
+        <!-- <a href="{{ article.news_url }}">{{ article.title }}</a> -->
+      </div>
     </div>
-</div>
-
-
-
-
-
-
-{% for category, news_list in category_news.items %}
-    <div class="hole">
-        <h2>{{ category }}</h2>
-        {% for article in news_list %}
-            <div class="article-card">
-                <div class="title-image">
-                    <img src="{{ article.image_url }}" alt="{{ article.title }}" />
-                    <a href="{{ article.news_url }}">{{ article.title }}</a>
-                </div>
-                <div class="desc">
-                    <!-- <p>{{ article.name }}</p> -->
-                    <!-- <p>{{ article.description }}</p> -->
-                    <p>Published at: {{ article.published_at }}</p>
-                </div>
-            </div>
     {% endfor %}
-    </div>
-{% endfor %}
-
-
+  </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

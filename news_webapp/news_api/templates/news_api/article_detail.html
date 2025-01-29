@@ -1,0 +1,21 @@
+{% extends 'news_api/base.html' %}
+
+{% block content %}
+
+<div class="custom-article">
+    <div class="custom-title-image">
+        <h1 class="news-title">{{ article.title }}</h1>
+        <div class="custom-image">
+        <img src="{{ article.image_url }}" alt="{{ article.title }}" />
+        </div>
+    </div>
+    
+    <p class="news-description">{{ article.description }}</p>
+
+    <p class="news-content">{{ article.content }}</p>
+
+    <p>{{ article.published_at }}</p>
+    <p>Views {{ article.view_count }}</p>
+</div>
+
+{% endblock %}

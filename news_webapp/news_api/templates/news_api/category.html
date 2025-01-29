@@ -8,54 +8,35 @@
 <div class="hole-category">
     <!-- <h1>{% if country %} {{ country|title }}{% endif %} {% if category %} {{ category|title }}{% endif %}</h1> -->
     {% for article in news %}
-        <div class="articles">
             <div class="article-card-category">
                 <!-- <h2>{{ article.title }}</h2> -->
                 <div class="title-image">
-                    <img src="{{ article.image_url }}" alt="{{ article.title }}">
-                    <a href="{{article.news_url}}">{{article.title}}</a>
+                    <img src="{{ article.image_url }}" alt="">
+                    <!-- <a href="{{article.news_url}}">{{article.title}}</a> -->
+                    <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">{{ article.title }}</a>
+
                 </div>
                 <div class="desc">
                     <p>{{ article.name }}</p>
-                    <p class="description">{{ article.description }}</p>
-                    <p class="publish">Published at: {{ article.published_at }}</p>
+                    <p class="description">{% if article.description %}  {{ article.description }} {% endif %}</p>
+                    <p class="content">
+                        {% if article.content %}
+                            {{ article.content|slice:":120" }}{% if article.content|length > 100 %}...{% endif %}
+                        {% endif %}
+                        <a class="news-link" target="_blank" href="{{ article.news_url }}" data-news-id="{{ article.id }}">
+                            {% if "آ" in article.content or "ا" in article.content or "ب" in article.content %}
+                                بیشتر بخوانید
+                            {% else %}
+                                read more
+                            {% endif %}
+                        </a>
+                    </p>         
+                    <p class="publish">{{ article.published_at }}</p>
+                    <p class="views"> Views {{article.view_count}}</p>
                 </div>
             </div>
-        </div>
     {% endfor %}
 </div>
 
 {% endblock %}
 
-
-
-<!-- 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-        <header>
-        <nav>
-        </nav>
-        </header>
-        
-        <main>
-            <h1>{% if country %}news in - {{ country|title }}{% endif %}</h1>
-            <h1>{% if category %} news in - {{ category|title }}{% endif %}</h1>
-            {% for article in news %}
-                <div class="article">
-                    <h2>{{ article.title }}</h2>
-                    <img src="{{ article.image_url }}" alt="{{ article.title }}" style="height: 100px; width: 100px;">
-                    <p>{{ article.description }}</p>
-                    <p>Published at: {{ article.published_at }}</p>
-                    <br><br>
-                </div>
-            {% endfor %}
-        </main>
-</body>
-</html> -->

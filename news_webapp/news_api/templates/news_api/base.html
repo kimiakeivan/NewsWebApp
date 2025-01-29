@@ -2,32 +2,54 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<html lang="fa">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSONews | </title>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'news_api/css/stylee.css' %}">
+
 </head>
-<body>
+<body >
     <header>
       <div class="title__links">
         <h4 class="logo"><a href="/home">JSONews</a></h4>
-        <input class="search" type="text" placeholder="Search for tipics ...">
+
+        <form method="GET" action="{% url 'search' %}" class="search-bar">
+          <!-- <div class="control"> -->
+            <input class="search" type="text" placeholder="Search for topics ..." name="q", value="{{q}}">
+            <!-- <button class="find"></button> -->
+          <!-- </div> -->
+        </form>
+        <!-- <i class='bx bx-search-alt-2'></i> -->
+
+        <button id="themeToggle" class="theme-toggle">
+          <i id="sunIcon" class='bx bxs-sun'></i>
+          <i id="moonIcon" class='bx bxs-moon hidden'></i>
+        </button>
+      
+
         <ul class="nav__links">
-          <li><a class="login" href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-          <li><a class="signup" href="{% url 'signup' %}?next={{ request.path }}">Sign Up</a></li>
-        </ul>
+          {% if user.is_authenticated %}
+            <li><form action="{% url 'logout' %}" method="post">{% csrf_token %}<button type="submit" class="login">Log Out</button></form></li>
+          {% else %}
+              <li><a class="login" href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+              <li><a class="signup" href="{% url 'signup' %}?next={{ request.path }}">Sign Up</a></li>
+          {% endif %}
+      </ul>
       </div>
       <nav>
           <ul class="nav__links">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/foryou">For you</a></li>
+            <li><a href="/home" class="{% if request.path == '/home/' %}active{% endif %}">Home</a></li>
+            <li><a href="/foryou" class="{% if request.path == '/foryou/' %}active{% endif %}">For you</a></li>
             {% for country in countries %}
-              <li><a href="/region/{{ country }}">{{ country }}</a></li>
+              <li><a href="/region/{{ country }}" class="{% if request.path == '/region/{{country}}/' %}active{% endif %}">{{ country }}</a></li>
             {% endfor %}
             {% for category in categories %}
-              <li><a href="/category/{{ category }}">{{ category }}</a></li>
+              <li><a href="/category/{{ category }}" class="{% if request.path == '/category/{{ category }}/' %}active{% endif %}">{{ category }}</a></li>
             {% endfor %}
           </ul>
         </nav>
@@ -36,14 +58,12 @@
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form>        
-    </footer>
 
-    <script src="{% static 'news_api/js/customize.js' %}"></script>
+    {% if request.path == '/foryou/' %}
+      <script src="{% static 'news_api/js/customize.js' %}"></script>
+    {% endif %}
+    <script src="{% static 'news_api/js/all.js' %}"></script>
+
 </body>
 </html>
 

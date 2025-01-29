@@ -14,11 +14,16 @@
         <h1>Login</h1>
         <form class="form" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
+            <div class="signup-design">
+                {{ form.as_p }}
+            </div>
+            <button class="login" type="submit">Login</button>
         </form>
-        <p>Don't have an account? <a href="{% url 'signup' %}?next={{ request.GET.next }}">Sign Up</a></p>
+        <p class="redirect">Don't have an account? <a class="formlink" href="{% url 'signup' %}?next={{ request.GET.next }}">Sign Up</a></p>
     </div>
+
+    <script src="{% static 'news_api/js/all.js' %}"></script>
+
 </body>
 </html>
 

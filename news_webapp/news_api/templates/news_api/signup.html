@@ -15,12 +15,15 @@
         <h1>Sign Up</h1>
         <form method="post" action="{% url 'signup' %}?next={{ next }}">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="signup-design">
+                {{ form.as_p }}
+            </div>
             <input type="hidden" name="next" value="{{ next }}">
-            <button type="submit">Sign Up</button>
+            <button class="login" type="submit">Sign Up</button>
         </form>
-        <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+        <p class="redirect">Alrady have an account? <a class="formlink" href="{% url 'login' %}?next={{ request.path }}">Login</a></p>
     </div>
+    <script src="{% static 'news_api/js/all.js' %}"></script>
 </body>
 </html>
 
